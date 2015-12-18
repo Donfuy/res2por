@@ -6,6 +6,7 @@
 package Multicast;
 import java.net.*;
 import Tools.*;
+import java.io.IOException;
 
 /**
  *
@@ -42,7 +43,7 @@ public class MulticastServer implements Runnable {
             packet = new DatagramPacket(list, list.length, InetAddress.getByName(group), port);
             s.send(packet);
             s.close();
-        } catch (Exception ex) {
+        } catch (IOException | ClassNotFoundException ex) {
             System.out.println(ex.getMessage());
         }
     }   

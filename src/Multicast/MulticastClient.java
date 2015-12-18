@@ -20,6 +20,7 @@ public class MulticastClient implements Runnable {
     public void run() {
         // port definido como 0 significa que escolhe uma porta que não esteja
         // ocupada automaticamente
+
         int port = 5000;
         // Which address
         String group = "225.4.5.6";
@@ -36,10 +37,11 @@ public class MulticastClient implements Runnable {
             int i = 0;
             while(i == 0) {
                 s.receive(packet);
-                new MulticastServer().run();
-                
-                String[] recvList = Util.byteArrayToStringArray(packet.getData());
-                ListHandler.addToGlobalFileList(recvList, packet.getAddress().toString());
+                if (!packet.getAddress().toString().substring(1).equals(Util.GetIp())) {
+                    new MulticastServer().run();
+                    String[] recvList = Util.byteArrayToStringArray(packet.getData());
+                    ListHandler.addToGlobalFileList(recvList, packet.getAddress().toString());
+                }
             }
             s.leaveGroup(InetAddress.getByName(group));
             s.close();

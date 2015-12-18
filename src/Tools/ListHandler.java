@@ -18,22 +18,34 @@ public class ListHandler {
     private static final String GLOBAL_LIST_FILENAME = "globalList";
     private static final String ASK_PATH = "Pasta: ";
     private static final String PATH_FILENAME = "path";
+    
+    public static String globalToString() {
+        String stringGlobalList = null;
+        String[][] globalList;
+        try {
+            globalList = getGlobalFileList();
+            for (int i = 0; i < globalList.length; i++) {
+                if (stringGlobalList == null) {
+                    stringGlobalList = globalList[i][0] + " | " + globalList[i][1];
+                } else {
+                    stringGlobalList = 
+                        stringGlobalList + "\n" +
+                        globalList[i][0] + " | " + globalList[i][1];    
+                }
+            }
+        } catch (IOException | ClassNotFoundException ex) {}
+        return stringGlobalList;
+    }
+    
     /** Retrieves the local file list.
      * 
      * @return  A string array containing all the files from this system.
+     * @throws java.io.IOException
+     * @throws java.lang.ClassNotFoundException
      */
     public String[] getFileList() throws IOException, ClassNotFoundException {
         String[] localFileList;
-        String path = null;
-        
-        try {
-            path = getPath();
-        } catch (Exception ex) {
-            if (path == null) {
-                setPath();
-                path = getPath();
-            }
-        }
+        String path = getPath();
 
         
         File folder = new File(path);
@@ -50,17 +62,22 @@ public class ListHandler {
     
     /**
      * 
+     * @throws java.io.IOException
      */
     public void setPath() throws IOException {
         System.out.println(ASK_PATH);
         Scanner scan = new Scanner(System.in);
         setPath(scan.nextLine());
+        //scan.close();
     }
     
-    public String getPath() throws IOException, ClassNotFoundException {
+    public String getPath() throws IOException, ClassNotFoundException {        
         ObjectInputStream ois = new ObjectInputStream(
             new FileInputStream(PATH_FILENAME));
-        return((String)ois.readObject());
+        String path = (String)ois.readObject();
+        ois.close();
+        
+        return path;
     }
     
     /** Sets the path of the folder to be worked on.
@@ -71,6 +88,7 @@ public class ListHandler {
         ObjectOutputStream oos = new ObjectOutputStream(
             new FileOutputStream(PATH_FILENAME));
         oos.writeObject(path);
+        oos.close();
     }
     
     /** Adds a list of files to the global list of files.
@@ -112,6 +130,7 @@ public class ListHandler {
             for (int i = currentGlobalList.length; i < newGlobalList.length; i++) {
                 newGlobalList[i][0] = (String)diff.get(z);
                 newGlobalList[i][1] = ip;
+                z++;
             }
         } else {
             newGlobalList = currentGlobalList;
@@ -131,6 +150,7 @@ public class ListHandler {
             new FileOutputStream(GLOBAL_LIST_FILENAME));
         
         ooS.writeObject(globalList);
+        ooS.close();
     }
     
     /** Copies the localFileList to the globalFileList.
@@ -150,6 +170,7 @@ public class ListHandler {
         }
         
         ooS.writeObject(globalList);
+        ooS.close();
     }
 
     /** Gets the global file list matrix from the file.
@@ -162,13 +183,17 @@ public class ListHandler {
     public static String[][] getGlobalFileList() throws IOException, ClassNotFoundException {
         ObjectInputStream oiS = new ObjectInputStream(
             new FileInputStream(GLOBAL_LIST_FILENAME));
-        return (String[][])oiS.readObject();
+        String[][] globalList = (String[][])oiS.readObject();
+        oiS.close();
+        
+        return globalList;
     }
 
     /** Transforms the localFileList into a transferable byte array.
      * 
      * @return byte[] containing the fileList
      * @throws IOException 
+     * @throws java.lang.ClassNotFoundException 
      */
     public byte[] getByteFileList() throws IOException, ClassNotFoundException {
         ByteArrayOutputStream baoS = new ByteArrayOutputStream(5000);
