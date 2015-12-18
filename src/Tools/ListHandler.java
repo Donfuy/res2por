@@ -19,6 +19,11 @@ public class ListHandler {
     private static final String ASK_PATH = "Pasta: ";
     private static final String PATH_FILENAME = "path";
     
+    /** Makes a nicely formatted list of the globalList.
+     * 
+     * @return A String containing a nicely formatted list of the globalList
+     * file.
+     */
     public static String globalToString() {
         String stringGlobalList = null;
         String[][] globalList;
@@ -60,7 +65,7 @@ public class ListHandler {
         return localFileList;
     }
     
-    /**
+    /** Asks the user to set the folder to be watched for files.
      * 
      * @throws java.io.IOException
      */
@@ -71,6 +76,13 @@ public class ListHandler {
         //scan.close();
     }
     
+    /** Gets the path as a string.
+     * 
+     * @return String containing the path.
+     * @throws IOException Unable to open path file.
+     * @throws ClassNotFoundException Path file didn't contain a string as
+     * expected.
+     */
     public String getPath() throws IOException, ClassNotFoundException {        
         ObjectInputStream ois = new ObjectInputStream(
             new FileInputStream(PATH_FILENAME));
@@ -82,7 +94,7 @@ public class ListHandler {
     
     /** Sets the path of the folder to be worked on.
      * 
-     * @param path 
+     * @param path - The path of the folder.
      */
     private void setPath(String path) throws IOException {
         ObjectOutputStream oos = new ObjectOutputStream(
