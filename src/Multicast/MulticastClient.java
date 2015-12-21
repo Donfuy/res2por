@@ -26,10 +26,6 @@ public class MulticastClient implements Runnable {
         // Which address
         String group = "225.4.5.6";
         
-        File globalDeleter = new File(new ListHandler().getGLOBAL_LIST_FILENAME());
-        globalDeleter.delete();
-        
-        
         new MulticastServer().run();
         
         try {
@@ -50,7 +46,6 @@ public class MulticastClient implements Runnable {
             }
             s.leaveGroup(InetAddress.getByName(group));
             s.close();
-            globalDeleter.delete();
         } catch (IOException | ClassNotFoundException ex) {
             System.out.println(ex.getMessage());
         }

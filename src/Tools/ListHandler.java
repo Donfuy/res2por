@@ -18,6 +18,22 @@ public class ListHandler {
     private static final String GLOBAL_LIST_FILENAME = "globalList";
     private static final String ASK_PATH = "Pasta: ";
     private static final String PATH_FILENAME = "path";
+
+    public static String getASK_PATH() {
+        return ASK_PATH;
+    }
+
+    public static String getPATH_FILENAME() {
+        return PATH_FILENAME;
+    }
+
+    /**
+     * 
+     * @return 
+     */
+    public static String getGLOBAL_LIST_FILENAME() {
+        return GLOBAL_LIST_FILENAME;
+    }
     
     /** Makes a nicely formatted list of the globalList.
      * 
@@ -168,6 +184,7 @@ public class ListHandler {
     /** Copies the localFileList to the globalFileList.
      * 
      * @throws java.io.IOException Error opening file to write.
+     * @throws java.lang.ClassNotFoundException
      */
     public void localToGlobalFileList() throws IOException, ClassNotFoundException {
         ObjectOutputStream ooS = new ObjectOutputStream(
@@ -177,14 +194,14 @@ public class ListHandler {
         // globalFileList logic
         for (int i = 0; i < getFileList().length; i++) {
             globalList[i][0] = getFileList()[i];
-            //globalList[i][1] = Util.GetIp();
-            globalList[i][1] = "172.20.129.42";
+            globalList[i][1] = Util.GetIp();
+            //globalList[i][1] = "172.20.129.42";
         }
         
         ooS.writeObject(globalList);
         ooS.close();
     }
-
+    
     /** Gets the global file list matrix from the file.
      * 
      * @return A matrix representing the global file list.
