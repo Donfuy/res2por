@@ -132,18 +132,20 @@ public class ListHandler {
     public static void addToGlobalFileList(String[] list, String ip) throws IOException, ClassNotFoundException {
         String[][] currentGlobalList = getGlobalFileList();
         String[][] newGlobalList = null;
-        boolean found;
+        boolean found = false;
         ArrayList diff = new ArrayList();
+        
         for (int i = 0; i < list.length; i++) {
-            found = false;
+            // Sets found as true if the file is already in the list
             for (int j = 0; j < currentGlobalList.length; j++) {
-                if (!list[i].equals(currentGlobalList[j][0])) {
+                if (list[i].equals(currentGlobalList[j][0])) { 
                     found = true;
                 }
             }
             if (found == true) {
                 diff.add(list[i]);
             }
+            found = false;
         }
         if (!diff.isEmpty()) {
             newGlobalList = 
