@@ -142,7 +142,7 @@ public class ListHandler {
                     found = true;
                 }
             }
-            if (found == true) {
+            if (found == false) {
                 diff.add(list[i]);
             }
             found = false;
