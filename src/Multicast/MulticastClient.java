@@ -9,6 +9,7 @@ import Tools.ListHandler;
 import java.io.IOException;
 import java.net.*;
 import Tools.Util;
+import java.io.File;
 
 /**
  *
@@ -24,6 +25,10 @@ public class MulticastClient implements Runnable {
         int port = 5000;
         // Which address
         String group = "225.4.5.6";
+        
+        File globalDeleter = new File(new ListHandler().getGLOBAL_LIST_FILENAME());
+        globalDeleter.delete();
+        
         
         new MulticastServer().run();
         
@@ -45,6 +50,7 @@ public class MulticastClient implements Runnable {
             }
             s.leaveGroup(InetAddress.getByName(group));
             s.close();
+            globalDeleter.delete();
         } catch (IOException | ClassNotFoundException ex) {
             System.out.println(ex.getMessage());
         }
