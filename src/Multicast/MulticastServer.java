@@ -20,16 +20,19 @@ public class MulticastServer implements Runnable {
         // ocupada automaticamente
         int port = 5000;
         String group ="225.4.5.6";
-        String ip="192.168.59.5";
         
-        try {
-            InetAddress ip2 = InetAddress.getByName(ip);        
+        try {   
             MulticastSocket s;
             s = new MulticastSocket();    
             ListHandler handler = new ListHandler();
       
             // Cria ficheiro globalList contendo só a sua lista local
-            handler.localToGlobalFileList();  
+            try {
+                handler.getGlobalFileList();
+            } catch (IOException ex) {
+                handler.localToGlobalFileList(); 
+            }
+ 
             // Transforma a lista local num array de bytes para poder ser
             // transferido num packet.
             byte[] list;
