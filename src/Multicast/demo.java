@@ -6,6 +6,7 @@
 package Multicast;
 
 import Tools.*;
+import java.io.File;
 import java.io.IOException;
 import java.net.SocketException;
 import java.util.Scanner;
@@ -17,10 +18,16 @@ import java.util.Scanner;
 public class demo {
     public static void main(String[] args) throws SocketException, IOException {
         //new MulticastServer().run();
+                
+        File globalDeleter = new File(ListHandler.getGLOBAL_LIST_FILENAME());
+        globalDeleter.delete();
+        globalDeleter = new File(ListHandler.getPATH_FILENAME());
+        globalDeleter.delete();
         
         MulticastClient cliente = new MulticastClient();
         Menu menu = new Menu();
         Thread tclient = new Thread(cliente);
+
         
         try {
             new ListHandler().getPath();
@@ -32,6 +39,9 @@ public class demo {
         tclient.start(); //inicia a thread cliente 
         tmenu.start();
         
+        globalDeleter.deleteOnExit();
+        globalDeleter = new File(ListHandler.getGLOBAL_LIST_FILENAME());
+        globalDeleter.deleteOnExit();
 //        new MulticastClient().run();
         
     }
