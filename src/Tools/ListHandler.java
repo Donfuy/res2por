@@ -46,11 +46,13 @@ public class ListHandler {
         try {
             globalList = getGlobalFileList();
             for (int i = 0; i < globalList.length; i++) {
+                int ui = i + 1;
                 if (stringGlobalList == null) {
-                    stringGlobalList = globalList[i][0] + " | " + globalList[i][1];
+                    stringGlobalList = ui + " | " + globalList[i][0] + " | " + globalList[i][1];
                 } else {
-                    stringGlobalList = 
+                    stringGlobalList =
                         stringGlobalList + "\n" +
+                            ui + " | " +
                         globalList[i][0] + " | " + globalList[i][1];    
                 }
             }

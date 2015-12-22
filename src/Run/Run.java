@@ -15,9 +15,9 @@ import java.net.SocketException;
  *
  * @author Pinto
  */
-public class demo {
+public class Run {
     public static void main(String[] args) throws SocketException, IOException {
-        //new MulticastServer().run();
+        //new MulticastServer().Run();
                 
         File globalDeleter = new File(ListHandler.getGLOBAL_LIST_FILENAME());
         globalDeleter.delete();
@@ -38,11 +38,11 @@ public class demo {
         Thread tmenu = new Thread(menu);
         tclient.start(); //inicia a thread cliente 
         tmenu.start();
-        
+
         globalDeleter.deleteOnExit();
         globalDeleter = new File(ListHandler.getGLOBAL_LIST_FILENAME());
         globalDeleter.deleteOnExit();
-//        new MulticastClient().run();
+//        new MulticastClient().Run();
         
     }
 }
