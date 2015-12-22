@@ -38,7 +38,7 @@ public class TCPSend implements Runnable {
             try {
                 System.out.println("Accepted connection : " + socket);
                 // send file
-                File myFile = new File (ListHandler.getPATH_FILENAME() + filename);
+                File myFile = new File (ListHandler.getPath() + filename);
                 byte [] mybytearray  = new byte [(int)myFile.length()];
                 fis = new FileInputStream(myFile);
                 bis = new BufferedInputStream(fis);
@@ -48,6 +48,8 @@ public class TCPSend implements Runnable {
                 os.write(mybytearray,0,mybytearray.length);
                 os.flush();
                 System.out.println("Done.");
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(TCPSend.class.getName()).log(Level.SEVERE, null, ex);
             } finally {
                 if (bis != null) bis.close();
                 if (os != null) os.close();

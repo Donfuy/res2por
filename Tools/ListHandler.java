@@ -101,7 +101,7 @@ public class ListHandler {
      * @throws ClassNotFoundException Path file didn't contain a string as
      * expected.
      */
-    public String getPath() throws IOException, ClassNotFoundException {        
+    public static String getPath() throws IOException, ClassNotFoundException {        
         ObjectInputStream ois = new ObjectInputStream(
             new FileInputStream(PATH_FILENAME));
         String path = (String)ois.readObject();

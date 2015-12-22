@@ -46,7 +46,7 @@ public class TCPReceive implements Runnable {
             // receive file
             byte [] mybytearray  = new byte [MAX_FILE_SIZE];
             InputStream is = sock.getInputStream();
-            fos = new FileOutputStream(ListHandler.getPATH_FILENAME() + filename);
+            fos = new FileOutputStream(ListHandler.getPath() + filename);
             bos = new BufferedOutputStream(fos);
             bytesRead = is.read(mybytearray,0,mybytearray.length);
             current = bytesRead;
@@ -61,7 +61,7 @@ public class TCPReceive implements Runnable {
             bos.flush();
             System.out.println("File " + filename
                 + " downloaded (" + current + " bytes read)");
-        } catch (IOException ex) {
+        } catch (IOException | ClassNotFoundException ex) {
               Logger.getLogger(TCPReceive.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             if (fos != null && bos != null && sock != null) {
