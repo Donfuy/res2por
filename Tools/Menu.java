@@ -46,26 +46,33 @@ public class Menu extends Thread{
 
         Scanner ler = new Scanner(System.in);
         char opcao = ler.next().charAt(0);
-        
+        ler.reset();
         switch (opcao) {
             case '1':
-                    System.out.println(ListHandler.globalToString() + "\n");
-                    System.out.println("Prima qualquer tecla para voltar ao menu...");
-                    System.in.read();
-                    menu();
-                break;               
+                System.out.println(ListHandler.globalToString() + "\n");
+                System.out.println("Prima qualquer tecla para voltar ao menu...");
+                System.in.read();
+                menu();
+                
+                break;   
+            case '2':
+                System.out.println(ListHandler.globalToString() + "\n" + "Escolha o ficheiro que quer transferir: ");
+//                Scanner fichNum = new Scanner(System.in);
+                char num = ler.next().charAt(0);
+                MessageHandler.askFile(null);
+//                fichNum.close();
+                break;
             case '9':
-                    infor();
-                    menu();
+                infor();
+                menu();
+                
                 break;
             case '0':
-                    clearScreen();
-                    System.out.println("Saiu da aplicação, até a próxima.");
-                    
-                    System.exit(0);
+                clearScreen();
+                System.out.println("Saiu da aplicação, até a próxima.");
+                System.exit(0);
+                
                 break;
-                
-                
             default:
                   System.out.println("Este não é um dia válido!");
                   menu();
