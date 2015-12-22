@@ -22,14 +22,12 @@ public class Menu extends Thread{
     public void run(){
         try {
             menu();
-        } catch (IOException ex) {
-            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InterruptedException ex) {
+        } catch (IOException | InterruptedException | ClassNotFoundException ex) {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public void menu() throws IOException, InterruptedException {
+    public void menu() throws IOException, InterruptedException, ClassNotFoundException {
         
         clearScreen();
        
@@ -56,10 +54,17 @@ public class Menu extends Thread{
                 
                 break;   
             case '2':
-                System.out.println(ListHandler.globalToString() + "\n" + "Escolha o ficheiro que quer transferir: ");
+                System.out.println(
+                        ListHandler.globalToString() 
+                        + "\n" 
+                        +"Escolha o ficheiro que quer transferir: "
+                );
 //                Scanner fichNum = new Scanner(System.in);
-                char num = ler.next().charAt(0);
-//                MessageHandler.askFile();
+                int num = ler.nextInt();
+                MessageHandler.askFile(
+                        ListHandler.getGlobalFileList()[num - 1][0],
+                        ListHandler.getGlobalFileList()[num - 1][1]
+                );
 //                fichNum.close();
                 break;
             case '9':
