@@ -28,7 +28,7 @@ public class MulticastServer implements Runnable {
       
             // Cria ficheiro globalList contendo só a sua lista local
             try {
-                handler.getGlobalFileList();
+                ListHandler.getGlobalFileList();
             } catch (IOException ex) {
                 handler.localToGlobalFileList(); 
             }
