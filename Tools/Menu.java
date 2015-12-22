@@ -59,7 +59,7 @@ public class Menu extends Thread{
                 System.out.println(ListHandler.globalToString() + "\n" + "Escolha o ficheiro que quer transferir: ");
 //                Scanner fichNum = new Scanner(System.in);
                 char num = ler.next().charAt(0);
-                MessageHandler.askFile(null);
+//                MessageHandler.askFile();
 //                fichNum.close();
                 break;
             case '9':
