@@ -5,6 +5,7 @@
  */
 package TCP;
 
+import Tools.ListHandler;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -37,7 +38,7 @@ public class TCPSend implements Runnable {
             try {
                 System.out.println("Accepted connection : " + socket);
                 // send file
-                File myFile = new File (filename);
+                File myFile = new File (ListHandler.getPATH_FILENAME() + filename);
                 byte [] mybytearray  = new byte [(int)myFile.length()];
                 fis = new FileInputStream(myFile);
                 bis = new BufferedInputStream(fis);

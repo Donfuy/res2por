@@ -9,6 +9,7 @@ package TCP;
  *
  * @author zeze
  */
+import Tools.ListHandler;
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -45,7 +46,7 @@ public class TCPReceive implements Runnable {
             // receive file
             byte [] mybytearray  = new byte [MAX_FILE_SIZE];
             InputStream is = sock.getInputStream();
-            fos = new FileOutputStream(filename);
+            fos = new FileOutputStream(ListHandler.getPATH_FILENAME() + filename);
             bos = new BufferedOutputStream(fos);
             bytesRead = is.read(mybytearray,0,mybytearray.length);
             current = bytesRead;
