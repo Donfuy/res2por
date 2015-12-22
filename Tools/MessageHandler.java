@@ -5,18 +5,21 @@
  */
 package Tools;
 
-import TCP.TCPClient;
+import TCP.TCPReceive;
+import TCP.TCPSend;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Pinto
  */
-public class MessageHandler {
+public class MessageHandler implements Runnable {
     public static void askFile(String filename, String ip) throws IOException {
         Socket cliSocket = new Socket(ip, 6000);
         ObjectOutputStream ooS = new ObjectOutputStream(cliSocket.getOutputStream());
@@ -25,8 +28,29 @@ public class MessageHandler {
         ooS.writeObject(info);
         ooS.close();
         
-        TCPClient tcpc = new TCPClient(filename,ip,serv.getLocalPort());
-        Thread tTCPCli = new Thread(tcpc);
-        tTCPCli.start();
+        TCPReceive tcpc = new TCPReceive(filename,ip,serv.getLocalPort());
+        Thread tTCPReceive = new Thread(tcpc);
+        tTCPReceive.start();
+    }
+    
+    public static void receiveRequest() throws IOException, ClassNotFoundException {
+        ServerSocket serv = new ServerSocket(6000);
+        Socket socket = serv.accept();
+        ObjectInputStream oiS = new ObjectInputStream(socket.getInputStream());
+        Object[] info = (Object[])oiS.readObject();
+        oiS.close();
+        
+        TCPSend tcps = new TCPSend((String)info[0],socket,(int)info[1]);
+        Thread tTCPSend = new Thread(tcps);
+        tTCPSend.start();
+    }
+
+    @Override
+    public void run() {
+        try {
+            receiveRequest();
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(MessageHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

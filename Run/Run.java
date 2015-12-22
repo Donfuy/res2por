@@ -27,6 +27,9 @@ public class Run {
         MulticastClient cliente = new MulticastClient();
         Menu menu = new Menu();
         Thread tclient = new Thread(cliente);
+        MessageHandler messand = new MessageHandler();
+        Thread tmessand = new Thread(messand);
+        tmessand.start();
 
         
         try {

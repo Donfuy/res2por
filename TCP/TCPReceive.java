@@ -17,18 +17,18 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class TCPClient implements Runnable {
+public class TCPReceive implements Runnable {
     public final static int MAX_FILE_SIZE = 6022386;  // file size temporary hard coded
                                                     // should be bigger than the file to be downloaded
 
-    private static String filename = null;
-    private static String ip = null;
-    private static int port;
+    private String filename = null;
+    private String ip = null;
+    private int port;
   
-    public TCPClient(String filename, String ip, int port) {
-        TCPClient.filename = filename;
-        TCPClient.ip = ip;
-        TCPClient.port = port;
+    public TCPReceive(String filename, String ip, int port) {
+        this.filename = filename;
+        this.ip = ip;
+        this.port = port;
     }
 
     @Override
@@ -61,7 +61,7 @@ public class TCPClient implements Runnable {
             System.out.println("File " + filename
                 + " downloaded (" + current + " bytes read)");
         } catch (IOException ex) {
-              Logger.getLogger(TCPClient.class.getName()).log(Level.SEVERE, null, ex);
+              Logger.getLogger(TCPReceive.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             if (fos != null && bos != null && sock != null) {
                 try {
@@ -69,7 +69,7 @@ public class TCPClient implements Runnable {
                     bos.close();
                     sock.close();
                 } catch (IOException ex) {
-                    Logger.getLogger(TCPClient.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(TCPReceive.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
