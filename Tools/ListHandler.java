@@ -136,6 +136,7 @@ public class ListHandler {
         String[][] newGlobalList = null;
         boolean found = false;
         ArrayList diff = new ArrayList();
+        ip = ip.substring(1);
         
         for (int i = 0; i < list.length; i++) {
             // Sets found as true if the file is already in the list
