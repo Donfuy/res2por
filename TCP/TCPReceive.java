@@ -45,6 +45,7 @@ public class TCPReceive implements Runnable {
 
             // receive file
             byte [] mybytearray  = new byte [MAX_FILE_SIZE];
+
             InputStream is = sock.getInputStream();
             fos = new FileOutputStream(ListHandler.getPath() + filename);
             bos = new BufferedOutputStream(fos);

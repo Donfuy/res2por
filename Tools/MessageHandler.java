@@ -24,11 +24,12 @@ public class MessageHandler implements Runnable {
         Socket cliSocket = new Socket(ip, 6000);
         ObjectOutputStream ooS = new ObjectOutputStream(cliSocket.getOutputStream());
         ServerSocket serv = new ServerSocket(0);
-        Object[] info = {filename,serv.getLocalPort()};
+        int randport = serv.getLocalPort();
+        Object[] info = {filename,randport};
         ooS.writeObject(info);
         ooS.close();
         
-        TCPReceive tcpc = new TCPReceive(filename,ip,serv.getLocalPort());
+        TCPReceive tcpc = new TCPReceive(filename,ip,randport);
         Thread tTCPReceive = new Thread(tcpc);
         tTCPReceive.start();
     }
