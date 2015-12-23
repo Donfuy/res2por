@@ -29,7 +29,7 @@ public class Menu extends Thread{
 
     public void menu() throws IOException, InterruptedException, ClassNotFoundException {
         
-        clearConsole();
+        clearScreen();
        
 
         System.out.print("Bem vindo à Aplicação de troca de Ficheiros\n"
@@ -47,16 +47,16 @@ public class Menu extends Thread{
         ler.reset();
         switch (opcao) {
             case '1':
-                clearConsole();
+                clearScreen();
                 System.out.println(ListHandler.globalToString() + "\n");
                 System.out.println("Prima qualquer tecla para voltar ao menu...");
                 System.in.read();
-                clearConsole();
+                clearScreen();
                 menu();
                 
                 break;   
             case '2':
-                clearConsole();
+                clearScreen();
                 System.out.println(
                         ListHandler.globalToString() 
                         + "\n" 
@@ -77,7 +77,7 @@ public class Menu extends Thread{
                 
                 break;
             case '0':
-                clearConsole();
+                clearScreen();
                 System.out.println("Saiu da aplicação, até a próxima.");
                 System.exit(0);
                 
@@ -89,7 +89,7 @@ public class Menu extends Thread{
 
     }
     public void infor() throws InterruptedException, IOException{
-        clearConsole();
+        clearScreen();
         System.out.println("_______________________________________________________\n\n"
                            +"Aplicação Realizada no Ambito da unidade curricular de\nSistemas Distribuidos\n"
                            +"8120248 - Telmo Pinto Pinto - 8120248@estgf.ipp.pt\n"  
@@ -101,18 +101,10 @@ public class Menu extends Thread{
         sleep(3000);
         
     } 
-    public final static void clearConsole() {
-        try {
-            final String os = System.getProperty("os.name");
-            if (os.contains("Windows")) {
-                Runtime.getRuntime().exec("cls");
-            } else {
-                Runtime.getRuntime().exec("clear");
-            }
-        } catch (Exception e) {
-            //  Handle any exceptions.
-        }
-}
+    public static void clearScreen() {  
+        System.out.print("\033[H\033[2J");  
+        System.out.flush();  
+   }  
     
     
 }
