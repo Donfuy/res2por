@@ -36,10 +36,10 @@ public class TCPReceive implements Runnable {
     @Override
     public void run() {
         int bytesRead;
-        int current = 0;
+        int current;
         FileOutputStream fos = null;
         BufferedOutputStream bos = null;
-        ServerSocket servsock = null;
+        ServerSocket servsock;
         Socket sock = null;
         try {
             servsock = new ServerSocket(port);
