@@ -25,6 +25,7 @@ public class MessageHandler implements Runnable {
         ObjectOutputStream ooS = new ObjectOutputStream(cliSocket.getOutputStream());
         ServerSocket serv = new ServerSocket(0);
         int randport = serv.getLocalPort();
+        serv.close();
         Object[] info = {filename,randport};
         ooS.writeObject(info);
         ooS.close();
