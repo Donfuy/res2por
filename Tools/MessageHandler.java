@@ -40,7 +40,7 @@ public class MessageHandler implements Runnable {
         Object[] info = (Object[])oiS.readObject();
         oiS.close();
 
-        TCPSend tcps = new TCPSend((String)info[0],(int)info[1],socket.getLocalAddress().toString());
+        TCPSend tcps = new TCPSend((String)info[0],(int)info[1],socket.getRemoteSocketAddress().toString());
         Thread tTCPSend = new Thread(tcps);
         tTCPSend.start();
     }

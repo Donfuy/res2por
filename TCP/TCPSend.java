@@ -26,7 +26,10 @@ public class TCPSend implements Runnable {
     public TCPSend(String filename, int port, String ip) {
         this.filename = filename;
         this.port = port;
-        this.ip = ip;
+        ip = ip.substring(1);
+        String[] stringA = ip.split(":", 2);
+        this.ip = stringA[0];
+        
     }
 
     @Override
