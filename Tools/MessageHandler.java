@@ -30,7 +30,7 @@ public class MessageHandler implements Runnable {
         ooS.writeObject(info);
         ooS.close();
         
-        TCPReceive tcpc = new TCPReceive(filename,ip,randport);
+        TCPReceive tcpc = new TCPReceive(filename,randport);
         Thread tTCPReceive = new Thread(tcpc);
         tTCPReceive.start();
     }

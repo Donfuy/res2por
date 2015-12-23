@@ -23,13 +23,11 @@ public class TCPReceive implements Runnable {
     public final static int MAX_FILE_SIZE = 6022386;  // file size temporary hard coded
                                                     // should be bigger than the file to be downloaded
 
-    private String filename = null;
-    private String ip = null;
-    private int port;
+    private final String filename;
+    private final int port;
   
-    public TCPReceive(String filename, String ip, int port) {
+    public TCPReceive(String filename, int port) {
         this.filename = filename;
-        this.ip = ip;
         this.port = port;
     }
 

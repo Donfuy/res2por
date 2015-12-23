@@ -16,8 +16,6 @@ public class MulticastServer implements Runnable {
 
     @Override
     public void run() {
-        // port definido como 0 significa que escolhe uma porta que não esteja
-        // ocupada automaticamente
         int port = 5000;
         String group ="225.4.5.6";
         

@@ -17,8 +17,6 @@ import java.net.SocketException;
  */
 public class Run {
     public static void main(String[] args) throws SocketException, IOException {
-        //new MulticastServer().Run();
-                
         File globalDeleter = new File(ListHandler.getGLOBAL_LIST_FILENAME());
         globalDeleter.delete();
         globalDeleter = new File(ListHandler.getPATH_FILENAME());
@@ -33,7 +31,7 @@ public class Run {
 
         
         try {
-            new ListHandler().getPath();
+            ListHandler.getPath();
         } catch (IOException | ClassNotFoundException ex) {
             new ListHandler().setPath();
         }
@@ -44,8 +42,6 @@ public class Run {
 
         globalDeleter.deleteOnExit();
         globalDeleter = new File(ListHandler.getGLOBAL_LIST_FILENAME());
-        globalDeleter.deleteOnExit();
-//        new MulticastClient().Run();
-        
+        globalDeleter.deleteOnExit();        
     }
 }

@@ -18,11 +18,7 @@ public class MulticastClient implements Runnable {
 
     @Override
     public void run() {
-        // port definido como 0 significa que escolhe uma porta que não esteja
-        // ocupada automaticamente
-
         int port = 5000;
-        // Which address
         String group = "225.4.5.6";
         
         new MulticastServer().run();
@@ -49,5 +45,4 @@ public class MulticastClient implements Runnable {
             System.out.println(ex.getMessage());
         }
     }
-
 }
