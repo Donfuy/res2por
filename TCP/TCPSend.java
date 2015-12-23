@@ -20,13 +20,13 @@ public class TCPSend implements Runnable {
 
     private final String filename;
     private final int port;
-    private final Socket socket;
+    private final String ip;
   
   
-    public TCPSend(String filename, Socket socket, int port) {
+    public TCPSend(String filename, int port, String ip) {
         this.filename = filename;
         this.port = port;
-        this.socket = socket;
+        this.ip = ip;
     }
 
     @Override
@@ -34,8 +34,11 @@ public class TCPSend implements Runnable {
         FileInputStream fis;
         BufferedInputStream bis = null;
         OutputStream os = null;
+
         try {
+            Socket socket = new Socket(ip, port);
             try {
+
                 System.out.println("Accepted connection : " + socket);
                 // send file
                 File myFile = new File (ListHandler.getPath() + filename);
